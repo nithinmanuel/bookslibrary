@@ -1,0 +1,33 @@
+version: '3'
+services:
+  db:
+     image: postgres
+     environment:
+       - POSTGRES_DB=postgres
+       - POSTGRES_USER=postgres
+       - POSTGRES_PASSWORD=postgres
+     volumes:
+       - postgres_data:/var/lib/postgresql/data/     
+  
+      
+       
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    environment:
+      - SECRET_KEY=*(1ed#arb6f7rcxfkcvbd+fnst$$jwpq@vnnzu&xtt4&o%s%l)*
+      - DEBUG=1
+    volumes:
+      - .:/code
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+volumes: 
+    postgres_data:      
+
+     
+
+
+
+
